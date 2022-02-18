@@ -1,25 +1,30 @@
-import React, { useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import styles from "./PictureBlock.module.scss";
-import usePictures from "../../hooks/usePictures";
 import Picture from "./Picture";
 import Modal from "../Modal";
+import IPictures from "../../types/IPictures";
 
-type Props = {};
+type Props = {
+  pictures: IPictures[];
+  setPictures: React.Dispatch<React.SetStateAction<IPictures[]>>;
+};
 
-function PictureBlock({}: Props) {
+const PictureBlock = memo(({ pictures, setPictures }: Props) => {
   const [modalPic, setModalPic] = useState("");
   const [isModalOpened, setIsModalOpened] = useState(false);
-  const [pictures, setPictures] = usePictures();
-  function onRemovePicture(id: number) {
+  
+  const onRemovePicture = useCallback((id: number) => {
     const newArr = pictures.filter((i) => i.id !== id);
     setPictures(newArr);
-  }
-  function onSetModalPic(url: string) {
+  }, [pictures]);
+
+  const onSetModalPic = useCallback((url: string) => {
     setIsModalOpened(true);
     setModalPic(url);
-  }
+  }, []);
+
   return (
-    <div className={styles.flex}>
+    <ul className={styles.flex}>
       {pictures.map((pic, index) => {
         return (
           <Picture
@@ -35,8 +40,7 @@ function PictureBlock({}: Props) {
       {isModalOpened && (
         <Modal url={modalPic} setIsModalOpened={setIsModalOpened} />
       )}
-    </div>
+    </ul>
   );
-}
-
+});
 export default PictureBlock;

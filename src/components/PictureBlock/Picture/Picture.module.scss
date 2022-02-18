@@ -1,6 +1,14 @@
 .wrapper {
   position: relative;
+  .id {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+  }
   .remove {
+    background-color: #fff;
+    border: 1px solid blue;
+    padding: 5px;
     position: absolute;
     top: 5px;
     right: 5px;
@@ -9,7 +17,7 @@
   }
   img {
     cursor: pointer;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
   }
 }

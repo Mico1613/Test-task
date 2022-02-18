@@ -10,5 +10,12 @@
   select {
     padding: 5px;
     width: 140px;
+    margin-right: 20px;
+  }
+  button {
+    padding: 5px 20px;
+    border: 2px solid #000;
+    background-color: rgb(196, 152, 253);
+    font-size: 16px;
   }
 }

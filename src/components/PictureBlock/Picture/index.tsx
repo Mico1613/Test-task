@@ -1,5 +1,4 @@
-import React from "react";
-import { IPicture } from "../../../hooks/usePictures";
+import { memo } from "react";
 import styles from "./Picture.module.scss";
 
 type Props = {
@@ -10,23 +9,20 @@ type Props = {
   onSetModalPic: (url: string) => void;
 };
 
-function Picture({
-  url,
-  thumbnailUrl,
-  id,
-  onRemovePicture,
-  onSetModalPic,
-}: Props) {
-  return (
-    <div className={styles.wrapper}>
-      <span className={styles.remove} onClick={() => onRemovePicture(id)}>
-        Delete
-      </span>
-      <button onClick={() => onSetModalPic(url)}>
-        <img src={thumbnailUrl} alt="#" />
-      </button>
-    </div>
-  );
-}
+const Picture = memo(
+  ({ url, thumbnailUrl, id, onRemovePicture, onSetModalPic }: Props) => {
+    return (
+      <div className={styles.wrapper}>
+        <span className={styles.id}>{id}</span>
+        <span className={styles.remove} onClick={() => onRemovePicture(id)}>
+          Delete
+        </span>
+        <button onClick={() => onSetModalPic(url)}>
+          <img src={thumbnailUrl} alt="#" />
+        </button>
+      </div>
+    );
+  }
+);
 
 export default Picture;
